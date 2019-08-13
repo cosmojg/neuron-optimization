@@ -26,7 +26,7 @@ C = 100*xtools.binCost([900 2000],metrics.burst_period);
 C = C + 100*xtools.binCost([.1 .5],metrics.duty_cycle_mean);
 C = C + 100*xtools.binCost([2 20],metrics.n_spikes_per_burst_mean);
 C = C + 100*xtools.binCost([0 20], metrics.min_V_in_burst_mean - metrics.min_V_bw_burst_mean);
-C = C + 100*xtools.binCost([110 140],x.AB.Ca_average);
+C = C + 200*xtools.binCost([110 140],x.AB.Ca_average);
 
 % safety -- if something goes wrong, return a large cost
 if isnan(C)
