@@ -22,10 +22,11 @@ V = x.integrate;
 metrics = xtools.V2metrics(V,'sampling_rate',10);
 
 % accumulate errors
-C = xtools.binCost([950 1050],metrics.burst_period);
-C = C + xtools.binCost([.1 .3],metrics.duty_cycle_mean);
-C = C + xtools.binCost([7 10],metrics.n_spikes_per_burst_mean);
-C = C + xtools.binCost([111 136],x.AB.Ca_average);
+C = 100*xtools.binCost([900 2000],metrics.burst_period);
+C = C + 100*xtools.binCost([.1 .5],metrics.duty_cycle_mean);
+C = C + 100*xtools.binCost([2 20],metrics.n_spikes_per_burst_mean);
+C = C + 100*xtools.binCost([0 20], metrics.min_V_in_burst_mean - metrics.min_V_bw_burst_mean);
+C = C + 100*xtools.binCost([111 136],x.AB.Ca_average);
 
 % safety -- if something goes wrong, return a large cost
 if isnan(C)
