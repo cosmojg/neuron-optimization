@@ -14,16 +14,15 @@ p.options.UseParallel = true;
 % we assign a cost function
 p.SimFcn = @cosmo.burstingCostFcn;
 
-
 % we assign the xolotl object
 p.x = x;
 
 % we optimzie over all maximal conductances
 p.parameter_names = x.find('*gbar');
 % lower bound values
-p.lb = [100 0 0 0 0 500 500];
+p.lb = [100 0 0 0 0 500 0 500];
 % upper bound values
-p.ub = [1e3 100 100 10 500 2000 2000];
+p.ub = [1e3 100 100 10 500 2000 1 2000];
 
 % display the results before optimization
 figure('outerposition',[300 300 1200 600],'PaperUnits','points','PaperSize',[1200 600]); hold on
@@ -39,14 +38,12 @@ title('Before optimization')
 subplot(2,1,2); hold on
 set(gca,'XLim',[0 10],'YLim',[-80 50])
 
-
 % perform the optimization procedure
 p.fit;
 
 % the best fit is stored in p.seed
 % set the existing xolotl object to match
 x.set('*gbar',p.seed)
-
 
 % visualize the results of the optimization
 
