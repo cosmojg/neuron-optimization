@@ -5,7 +5,7 @@
 % if the mean spikes per burst is within [5, 20] then that part of the cost is zero
 % otherwise, the cost is the quadratic difference
 
-function [C, V] = burstingCostFcn(x,~)
+function [C, V] = BurstingCostFcn(x,~)
 
 % x is a xolotl object
 x.reset;
