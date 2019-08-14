@@ -8,11 +8,11 @@ x.set('*gbar',veclib.shuffle((x.get('*gbar'))))
 
 % we instantiate the xfit object
 % and specify the particle swarm engine
-p = xfit('patternsearch');
+p = xfit('particleswarm');
 p.options.UseParallel = true;
 
 % we assign a cost function
-p.SimFcn = @cosmo.burstingCostFcn;
+p.SimFcn = @calcium.BurstingCostFcn;
 
 % we assign the xolotl object
 p.x = x;
@@ -54,3 +54,18 @@ plot(time,V,'r')
 title('After optimization')
 
 figlib.pretty('LineWidth', 1, 'PlotLineWidth', 1, 'PlotBuffer', 0)
+
+% specify parameters to save
+p.SaveParameters = x.find('*gbar');
+p.SaveWhenCostBelow = 50;
+
+while true
+
+	p.seed = [];
+
+	% perform the optimization procedure
+	p.fit;
+
+	p.save;
+
+end
